@@ -89,6 +89,42 @@ Fields:
 - status
 - created_at
 
+
+### Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    users ||--o{ skills : offers
+    users ||--o{ exchange_requests : sends
+    skills ||--o{ exchange_requests : receives
+
+    users {
+        INTEGER id PK
+        TEXT name
+        TEXT email
+        TEXT password_hash
+        TEXT created_at
+    }
+
+    skills {
+        INTEGER id PK
+        INTEGER user_id FK
+        TEXT title
+        TEXT category
+        TEXT description
+        TEXT created_at
+    }
+
+    exchange_requests {
+        INTEGER id PK
+        INTEGER skill_id FK
+        INTEGER requester_id FK
+        TEXT status
+        TEXT created_at
+    }
+```
+
+
 Request statuses:
 - pending
 - accepted
