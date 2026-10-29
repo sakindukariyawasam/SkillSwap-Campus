@@ -2,722 +2,1000 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - SkillSwap Campus</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SkillSwap Campus</title>
 
-<style>
-* {
-    box-sizing: border-box;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4faf7;
-    color: #20352d;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-header {
-    background: #168457;
-    color: white;
-    padding: 20px 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4faf7;
+            color: #20352d;
+        }
 
-header h2 {
-    color: white;
-    margin: 0;
-}
+        header {
+            background: #168457;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
 
-.container {
-    max-width: 1050px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
+        header h2 {
+            color: white;
+            margin: 0;
+        }
 
-.welcome {
-    text-align: center;
-    padding: 25px;
-}
+        .container {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
 
-h1, h2 {
-    color: #168457;
-}
+        #dashboard {
+            padding-bottom: 45vh;
+        }
 
-.box {
-    background: white;
-    padding: 30px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px #00000010;
-}
+        #dashboard[hidden] {
+            display: none;
+        }
 
-label {
-    display: block;
-    margin: 15px 0 6px;
-    font-weight: bold;
-}
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000010;
+        }
 
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-}
+        .quick-nav a {
+            text-decoration: none;
+            color: #155f42;
+            background: #e5f5eb;
+            padding: 11px 17px;
+            border-radius: 9px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
 
-textarea {
-    min-height: 110px;
-    resize: vertical;
-}
+        .quick-nav a:hover {
+            background: #ccebd8;
+        }
 
-button {
-    background: #168457;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 14px;
-}
+        .quick-nav a:focus-visible {
+            outline: 3px solid #7bcbaa;
+            outline-offset: 2px;
+        }
 
-button:hover {
-    background: #106640;
-}
+        section[id] {
+            scroll-margin-top: 24px;
+        }
 
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
+        .welcome {
+            text-align: center;
+            padding: 25px;
+        }
 
-#addBtn {
-    margin-top: 20px;
-}
+        h1, h2 {
+            color: #168457;
+        }
 
-#logoutBtn {
-    background: white;
-    color: #168457;
-}
+        .box {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000010;
+        }
 
-.filters {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 15px;
-    margin-top: 20px;
-}
+        label {
+            display: block;
+            margin: 15px 0 6px;
+            font-weight: bold;
+        }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
 
-.skill-card, .request-card {
-    background: #f6fbf8;
-    border: 1px solid #d5e9dc;
-    padding: 20px;
-    border-radius: 10px;
-}
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
 
-.skill-card h3, .request-card h3 {
-    margin-top: 0;
-    color: #168457;
-}
+        button {
+            background: #168457;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-.skill-card p, .request-card p {
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
+        button:hover {
+            background: #106640;
+        }
 
-.category {
-    color: #168457;
-    font-weight: bold;
-}
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
 
-.owner {
-    color: #666;
-    font-size: 14px;
-}
+        #addBtn {
+            margin-top: 20px;
+        }
 
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
-}
+        #logoutBtn {
+            background: white;
+            color: #168457;
+        }
 
-.danger {
-    background: #dc3545;
-}
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-.danger:hover {
-    background: #b02a37;
-}
+        .skills-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-.status {
-    font-weight: bold;
-    text-transform: capitalize;
-}
+        .skill-card,
+        .request-card {
+            background: #f6fbf8;
+            border: 1px solid #d5e9dc;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-.pending {
-    color: #a66a00;
-}
+        .skill-card h3,
+        .request-card h3 {
+            margin-top: 0;
+            color: #168457;
+        }
 
-.accepted {
-    color: #168457;
-}
+        .skill-card p,
+        .request-card p {
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
 
-.rejected {
-    color: #dc3545;
-}
+        .category {
+            color: #168457;
+            font-weight: bold;
+        }
 
-.request-list {
-    display: grid;
-    gap: 15px;
-    margin-top: 20px;
-}
+        .owner {
+            color: #666;
+            font-size: 14px;
+        }
 
-#skillCount {
-    color: #607168;
-    font-size: 14px;
-}
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
 
-#message {
-    margin-top: 15px;
-    font-weight: bold;
-}
+        .danger {
+            background: #dc3545;
+        }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #607168;
-}
+        .danger:hover {
+            background: #b02a37;
+        }
 
-@media (max-width: 650px) {
-    header {
-        flex-direction: column;
-    }
+        .status {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
 
-    .filters {
-        grid-template-columns: 1fr;
-    }
+        .pending {
+            color: #a66a00;
+        }
 
-    .box {
-        padding: 20px;
-    }
-}
-</style>
+        .accepted {
+            color: #168457;
+        }
+
+        .rejected {
+            color: #dc3545;
+        }
+
+        .request-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #skillCount {
+            color: #607168;
+            font-size: 14px;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #607168;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                flex-direction: column;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .box {
+                padding: 20px;
+            }
+
+            .quick-nav {
+                gap: 8px;
+            }
+
+            .quick-nav a {
+                flex: 1 1 135px;
+                text-align: center;
+                padding: 12px 9px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/ui-polish.css">
 </head>
 
 <body>
 
-<header>
-    <h2>SkillSwap Campus</h2>
-    <button id="logoutBtn">Logout</button>
-</header>
+    <header>
+        <h2>SkillSwap Campus</h2>
+        <button id="logoutBtn" type="button">Logout</button>
+    </header>
 
-<main class="container" id="dashboard" hidden>
+    <main class="container" id="dashboard" hidden>
 
-    <div class="welcome">
-        <h1 id="welcome">Welcome!</h1>
-        <p>Learn Together. Grow Together.</p>
-    </div>
+        <nav class="quick-nav"
+             aria-label="Dashboard navigation">
 
-    <section class="box">
-        <h2>Add New Skill</h2>
+            <a href="#add-skill">Add Skill</a>
 
-        <form id="skillForm">
-            <label for="title">Skill Title</label>
-            <input id="title" type="text"
-                   minlength="3" maxlength="100"
-                   placeholder="e.g. Python Programming"
-                   required>
+            <a href="#explore-skills">Explore Skills</a>
 
-            <label for="category">Category</label>
-            <select id="category" required>
-                <option value="">Select Category</option>
-                <option>Programming</option>
-                <option>Mathematics</option>
-                <option>Design</option>
-                <option>Languages</option>
-                <option>Other</option>
-            </select>
+            <a href="#sent-requests">Sent Requests</a>
 
-            <label for="description">Description</label>
-            <textarea id="description"
-                      minlength="10" maxlength="1000"
-                      placeholder="What can you teach?"
-                      required></textarea>
+            <a href="#received-requests">Received Requests</a>
 
-            <button type="submit" id="addBtn">
-                Add Skill
-            </button>
-        </form>
+        </nav>
 
-        <p id="message" role="status"></p>
-    </section>
+        <div class="welcome">
+            <h1 id="welcome">Welcome!</h1>
+            <p>Learn Together. Grow Together.</p>
+        </div>
 
-    <section class="box">
-        <h2>Explore Skills</h2>
-        <p>Discover learning opportunities.</p>
+        <section class="box" id="add-skill">
 
-        <div class="filters">
-            <div>
-                <label for="searchSkills">Search Skills</label>
-                <input id="searchSkills" type="search"
-                       placeholder="Search skills or students">
-            </div>
+            <h2>Add New Skill</h2>
 
-            <div>
-                <label for="filterCategory">Category</label>
-                <select id="filterCategory">
-                    <option value="">All Categories</option>
+            <form id="skillForm">
+
+                <label for="title">Skill Title</label>
+
+                <input
+                    id="title"
+                    type="text"
+                    minlength="3"
+                    maxlength="100"
+                    placeholder="e.g. Python Programming"
+                    required
+                >
+
+                <label for="category">Category</label>
+
+                <select id="category" required>
+                    <option value="">Select Category</option>
                     <option>Programming</option>
                     <option>Mathematics</option>
                     <option>Design</option>
                     <option>Languages</option>
                     <option>Other</option>
                 </select>
+
+                <label for="description">Description</label>
+
+                <textarea
+                    id="description"
+                    minlength="10"
+                    maxlength="1000"
+                    placeholder="What can you teach?"
+                    required
+                ></textarea>
+
+                <button type="submit" id="addBtn">
+                    Add Skill
+                </button>
+
+            </form>
+
+            <p id="message" role="status"></p>
+
+        </section>
+
+        <section class="box" id="explore-skills">
+
+            <h2>Explore Skills</h2>
+
+            <p>Discover learning opportunities.</p>
+
+            <div class="filters">
+
+                <div>
+                    <label for="searchSkills">Search Skills</label>
+
+                    <input
+                        id="searchSkills"
+                        type="search"
+                        placeholder="Search skills or students"
+                    >
+                </div>
+
+                <div>
+                    <label for="filterCategory">Category</label>
+
+                    <select id="filterCategory">
+                        <option value="">All Categories</option>
+                        <option>Programming</option>
+                        <option>Mathematics</option>
+                        <option>Design</option>
+                        <option>Languages</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="sortSkills">Sort By</label>
+
+                    <select id="sortSkills">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="az">Title A to Z</option>
+                        <option value="za">Title Z to A</option>
+                    </select>
+                </div>
+
             </div>
 
-            <div>
-                <label for="sortSkills">Sort By</label>
-                <select id="sortSkills">
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                    <option value="az">Title A to Z</option>
-                    <option value="za">Title Z to A</option>
-                </select>
+            <p id="skillCount"></p>
+
+            <div id="skillsList" class="skills-grid">
+                Loading skills...
             </div>
-        </div>
 
-        <p id="skillCount"></p>
+        </section>
 
-        <div id="skillsList" class="skills-grid">
-            Loading skills...
-        </div>
-    </section>
+        <section class="box" id="sent-requests">
 
-    <section class="box">
-        <h2>My Sent Requests</h2>
-        <p>Track your learning requests.</p>
-        <div id="sentList" class="request-list">
-            Loading requests...
-        </div>
-    </section>
+            <h2>My Sent Requests</h2>
 
-    <section class="box">
-        <h2>Received Requests</h2>
-        <p>Respond to students who want to learn from you.</p>
-        <div id="receivedList" class="request-list">
-            Loading requests...
-        </div>
-    </section>
+            <p>Track your learning requests.</p>
 
-</main>
+            <div id="sentList" class="request-list">
+                Loading requests...
+            </div>
 
-<footer>
-    © 2026 SkillSwap Campus | EE4207
-</footer>
+        </section>
 
-<script>
-let currentStudentId = null;
-let allSkills = [];
-let sentRequests = [];
-let receivedRequests = [];
+        <section class="box" id="received-requests">
 
-const dashboard = document.getElementById('dashboard');
-const message = document.getElementById('message');
-const skillsList = document.getElementById('skillsList');
-const sentList = document.getElementById('sentList');
-const receivedList = document.getElementById('receivedList');
+            <h2>Received Requests</h2>
 
-async function api(url, options = {}) {
-    const response = await fetch(url, options);
-    const type = response.headers.get('content-type') || '';
+            <p>
+                Respond to students who want to learn from you.
+            </p>
 
-    if (!type.includes('application/json')) {
-        throw new Error('Unexpected server response: HTTP ' +
-                        response.status);
-    }
+            <div id="receivedList" class="request-list">
+                Loading requests...
+            </div>
 
-    const data = await response.json();
+        </section>
 
-    if (!response.ok) {
-        throw new Error(data.message || 'Request failed');
-    }
+    </main>
 
-    return data;
-}
+    <footer>
+        © 2026 SkillSwap Campus | EE4207
+    </footer>
 
-function addText(parent, tag, text, className = '') {
-    const element = document.createElement(tag);
-    element.textContent = text;
-    if (className) element.className = className;
-    parent.appendChild(element);
-    return element;
-}
+    <script>
+        let currentStudentId = null;
+        let allSkills = [];
+        let sentRequests = [];
+        let receivedRequests = [];
 
-function addButton(parent, label, action, className = '') {
-    const button = document.createElement('button');
-    button.textContent = label;
-    if (className) button.className = className;
-    button.addEventListener('click', action);
-    parent.appendChild(button);
-    return button;
-}
+        const dashboard = document.getElementById('dashboard');
+        const message = document.getElementById('message');
+        const skillsList = document.getElementById('skillsList');
+        const sentList = document.getElementById('sentList');
+        const receivedList = document.getElementById('receivedList');
 
-async function loadStudent() {
-    try {
-        const student = await api('/api/auth/me');
+        async function api(url, options = {}) {
+            const response = await fetch(url, options);
 
-        currentStudentId = student.id;
+            const type =
+                response.headers.get('content-type') || '';
 
-        document.getElementById('welcome').textContent =
-            'Welcome, ' + student.name + '!';
+            if (!type.includes('application/json')) {
+                throw new Error(
+                    'Unexpected server response: HTTP ' +
+                    response.status
+                );
+            }
 
-        dashboard.hidden = false;
+            const data = await response.json();
 
-        await loadData();
+            if (!response.ok) {
+                throw new Error(
+                    data.message || 'Request failed'
+                );
+            }
 
-    } catch (error) {
-        window.location.replace('/login.html');
-    }
-}
-
-async function loadData() {
-    try {
-        const results = await Promise.all([
-            api('/api/skills'),
-            api('/api/requests/sent'),
-            api('/api/requests/received')
-        ]);
-
-        allSkills = results[0];
-        sentRequests = results[1];
-        receivedRequests = results[2];
-
-        renderSkills();
-        renderRequests();
-
-    } catch (error) {
-        skillsList.textContent = error.message;
-        sentList.textContent = 'Unable to load requests';
-        receivedList.textContent = 'Unable to load requests';
-    }
-}
-
-function renderSkills() {
-    const search = document.getElementById(
-        'searchSkills').value.toLowerCase().trim();
-
-    const category = document.getElementById(
-        'filterCategory').value;
-
-    const sort = document.getElementById(
-        'sortSkills').value;
-
-    let filtered = allSkills.filter(skill => {
-        const matchesSearch =
-            skill.title.toLowerCase().includes(search) ||
-            skill.description.toLowerCase().includes(search) ||
-            skill.student_name.toLowerCase().includes(search);
-
-        const matchesCategory =
-            !category || skill.category === category;
-
-        return matchesSearch && matchesCategory;
-    });
-
-    filtered.sort((a, b) => {
-        if (sort === 'oldest') return a.id - b.id;
-        if (sort === 'az') {
-            return a.title.localeCompare(b.title);
+            return data;
         }
-        if (sort === 'za') {
-            return b.title.localeCompare(a.title);
+
+        function addText(parent, tag, text, className = '') {
+            const element = document.createElement(tag);
+
+            element.textContent = text;
+
+            if (className) {
+                element.className = className;
+            }
+
+            parent.appendChild(element);
+
+            return element;
         }
-        return b.id - a.id;
-    });
 
-    document.getElementById('skillCount').textContent =
-        'Showing ' + filtered.length +
-        ' of ' + allSkills.length + ' skills';
+        function addButton(parent, label, action, className = '') {
+            const button = document.createElement('button');
 
-    skillsList.replaceChildren();
+            button.type = 'button';
+            button.textContent = label;
 
-    if (filtered.length === 0) {
-        skillsList.textContent = 'No matching skills found.';
-        return;
-    }
+            if (className) {
+                button.className = className;
+            }
 
-    filtered.forEach(skill => {
-        const card = document.createElement('div');
-        card.className = 'skill-card';
+            button.addEventListener('click', action);
 
-        addText(card, 'h3', skill.title);
-        addText(card, 'p', skill.category, 'category');
-        addText(card, 'p', skill.description);
-        addText(card, 'p',
-            'Offered by: ' + skill.student_name, 'owner');
+            parent.appendChild(button);
 
-        const actions = document.createElement('div');
-        actions.className = 'actions';
+            return button;
+        }
 
-        if (Number(skill.user_id) ===
-            Number(currentStudentId)) {
+        async function loadStudent() {
+            try {
+                const student = await api('/api/auth/me');
 
-            addButton(actions, 'Edit',
-                () => editSkill(skill));
+                currentStudentId = student.id;
 
-            addButton(actions, 'Delete',
-                () => deleteSkill(skill), 'danger');
+                document.getElementById('welcome').textContent =
+                    'Welcome, ' + student.name + '!';
 
-        } else {
-            const active = sentRequests.find(r =>
-                Number(r.skill_id) === Number(skill.id) &&
-                ['pending', 'accepted'].includes(r.status)
+                dashboard.hidden = false;
+
+                await loadData();
+
+            } catch (error) {
+                window.location.replace('/login.html');
+            }
+        }
+
+        async function loadData() {
+            try {
+                const results = await Promise.all([
+                    api('/api/skills'),
+                    api('/api/requests/sent'),
+                    api('/api/requests/received')
+                ]);
+
+                allSkills = results[0];
+                sentRequests = results[1];
+                receivedRequests = results[2];
+
+                renderSkills();
+                renderRequests();
+
+            } catch (error) {
+                skillsList.textContent = error.message;
+                sentList.textContent = 'Unable to load requests';
+                receivedList.textContent =
+                    'Unable to load requests';
+            }
+        }
+
+        function renderSkills() {
+            const search = document
+                .getElementById('searchSkills')
+                .value.toLowerCase().trim();
+
+            const category = document
+                .getElementById('filterCategory')
+                .value;
+
+            const sort = document
+                .getElementById('sortSkills')
+                .value;
+
+            let filtered = allSkills.filter(skill => {
+                const matchesSearch =
+                    skill.title.toLowerCase().includes(search) ||
+                    skill.description.toLowerCase().includes(search) ||
+                    skill.student_name.toLowerCase().includes(search);
+
+                const matchesCategory =
+                    !category || skill.category === category;
+
+                return matchesSearch && matchesCategory;
+            });
+
+            filtered.sort((a, b) => {
+                if (sort === 'oldest') {
+                    return a.id - b.id;
+                }
+
+                if (sort === 'az') {
+                    return a.title.localeCompare(b.title);
+                }
+
+                if (sort === 'za') {
+                    return b.title.localeCompare(a.title);
+                }
+
+                return b.id - a.id;
+            });
+
+            document.getElementById('skillCount').textContent =
+                'Showing ' + filtered.length +
+                ' of ' + allSkills.length + ' skills';
+
+            skillsList.replaceChildren();
+
+            if (filtered.length === 0) {
+                skillsList.textContent =
+                    'No matching skills found.';
+                return;
+            }
+
+            filtered.forEach(skill => {
+                const card = document.createElement('div');
+
+                card.className = 'skill-card';
+
+                addText(card, 'h3', skill.title);
+
+                addText(
+                    card,
+                    'p',
+                    skill.category,
+                    'category'
+                );
+
+                addText(card, 'p', skill.description);
+
+                addText(
+                    card,
+                    'p',
+                    'Offered by: ' + skill.student_name,
+                    'owner'
+                );
+
+                const actions = document.createElement('div');
+
+                actions.className = 'actions';
+
+                if (
+                    Number(skill.user_id) ===
+                    Number(currentStudentId)
+                ) {
+                    addButton(
+                        actions,
+                        'Edit',
+                        () => editSkill(skill)
+                    );
+
+                    addButton(
+                        actions,
+                        'Delete',
+                        () => deleteSkill(skill),
+                        'danger'
+                    );
+
+                } else {
+                    const active = sentRequests.find(r =>
+                        Number(r.skill_id) === Number(skill.id) &&
+                        ['pending', 'accepted'].includes(r.status)
+                    );
+
+                    if (active) {
+                        addText(
+                            actions,
+                            'p',
+                            'Request: ' + active.status,
+                            'status ' + active.status
+                        );
+
+                    } else {
+                        addButton(
+                            actions,
+                            'Request to Learn',
+                            () => sendRequest(skill)
+                        );
+                    }
+                }
+
+                card.appendChild(actions);
+
+                skillsList.appendChild(card);
+            });
+        }
+
+        function renderRequests() {
+            sentList.replaceChildren();
+            receivedList.replaceChildren();
+
+            if (sentRequests.length === 0) {
+                sentList.textContent =
+                    'No sent requests yet.';
+            }
+
+            sentRequests.forEach(request => {
+                const card = document.createElement('div');
+
+                card.className = 'request-card';
+
+                addText(
+                    card,
+                    'h3',
+                    request.skill_title
+                );
+
+                addText(
+                    card,
+                    'p',
+                    'Skill Owner: ' + request.owner_name
+                );
+
+                addText(
+                    card,
+                    'p',
+                    'Status: ' + request.status,
+                    'status ' + request.status
+                );
+
+                sentList.appendChild(card);
+            });
+
+            if (receivedRequests.length === 0) {
+                receivedList.textContent =
+                    'No received requests yet.';
+            }
+
+            receivedRequests.forEach(request => {
+                const card = document.createElement('div');
+
+                card.className = 'request-card';
+
+                addText(
+                    card,
+                    'h3',
+                    request.skill_title
+                );
+
+                addText(
+                    card,
+                    'p',
+                    'Requested by: ' + request.requester_name
+                );
+
+                addText(
+                    card,
+                    'p',
+                    'Status: ' + request.status,
+                    'status ' + request.status
+                );
+
+                if (request.status === 'pending') {
+                    const actions =
+                        document.createElement('div');
+
+                    actions.className = 'actions';
+
+                    addButton(
+                        actions,
+                        'Accept',
+                        () => updateRequest(
+                            request.id,
+                            'accepted'
+                        )
+                    );
+
+                    addButton(
+                        actions,
+                        'Reject',
+                        () => updateRequest(
+                            request.id,
+                            'rejected'
+                        ),
+                        'danger'
+                    );
+
+                    card.appendChild(actions);
+                }
+
+                receivedList.appendChild(card);
+            });
+        }
+
+        async function sendRequest(skill) {
+            if (!confirm(
+                'Request to learn ' + skill.title + '?'
+            )) {
+                return;
+            }
+
+            try {
+                const data = await api('/api/requests', {
+                    method: 'POST',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify({
+                        skillId: skill.id
+                    })
+                });
+
+                alert(data.message);
+
+                await loadData();
+
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        async function updateRequest(id, status) {
+            if (!confirm(
+                'Are you sure you want to ' +
+                status + ' this request?'
+            )) {
+                return;
+            }
+
+            try {
+                const data = await api(
+                    '/api/requests/' + id + '/status',
+                    {
+                        method: 'PATCH',
+
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            status
+                        })
+                    }
+                );
+
+                alert(data.message);
+
+                await loadData();
+
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        document.getElementById('skillForm')
+            .addEventListener('submit', async function(event) {
+
+                event.preventDefault();
+
+                const title =
+                    document.getElementById('title').value;
+
+                const category =
+                    document.getElementById('category').value;
+
+                const description =
+                    document.getElementById('description').value;
+
+                const addBtn =
+                    document.getElementById('addBtn');
+
+                addBtn.disabled = true;
+                message.textContent = '';
+
+                try {
+                    const data = await api('/api/skills', {
+                        method: 'POST',
+
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            title,
+                            category,
+                            description
+                        })
+                    });
+
+                    message.textContent = data.message;
+                    message.style.color = 'green';
+
+                    document.getElementById('skillForm').reset();
+
+                    await loadData();
+
+                } catch (error) {
+                    message.textContent = error.message;
+                    message.style.color = 'red';
+
+                } finally {
+                    addBtn.disabled = false;
+                }
+            });
+
+        async function editSkill(skill) {
+            const title = prompt(
+                'Skill Title:',
+                skill.title
             );
 
-            if (active) {
-                addText(actions, 'p',
-                    'Request: ' + active.status, 'status');
-            } else {
-                addButton(actions, 'Request to Learn',
-                    () => sendRequest(skill));
+            if (title === null) return;
+
+            const category = prompt(
+                'Category:',
+                skill.category
+            );
+
+            if (category === null) return;
+
+            const description = prompt(
+                'Description:',
+                skill.description
+            );
+
+            if (description === null) return;
+
+            try {
+                const data = await api(
+                    '/api/skills/' + skill.id,
+                    {
+                        method: 'PUT',
+
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            title,
+                            category,
+                            description
+                        })
+                    }
+                );
+
+                alert(data.message);
+
+                await loadData();
+
+            } catch (error) {
+                alert(error.message);
             }
         }
 
-        card.appendChild(actions);
-        skillsList.appendChild(card);
-    });
-}
+        async function deleteSkill(skill) {
+            if (!confirm(
+                'Delete "' + skill.title +
+                '" and its associated learning requests?'
+            )) {
+                return;
+            }
 
-function renderRequests() {
-    sentList.replaceChildren();
-    receivedList.replaceChildren();
+            try {
+                const data = await api(
+                    '/api/skills/' + skill.id,
+                    {
+                        method: 'DELETE'
+                    }
+                );
 
-    if (sentRequests.length === 0) {
-        sentList.textContent = 'No sent requests yet.';
-    }
+                alert(data.message);
 
-    sentRequests.forEach(request => {
-        const card = document.createElement('div');
-        card.className = 'request-card';
+                await loadData();
 
-        addText(card, 'h3', request.skill_title);
-        addText(card, 'p',
-            'Skill Owner: ' + request.owner_name);
-        addText(card, 'p',
-            'Status: ' + request.status,
-            'status ' + request.status);
-
-        sentList.appendChild(card);
-    });
-
-    if (receivedRequests.length === 0) {
-        receivedList.textContent = 'No received requests yet.';
-    }
-
-    receivedRequests.forEach(request => {
-        const card = document.createElement('div');
-        card.className = 'request-card';
-
-        addText(card, 'h3', request.skill_title);
-        addText(card, 'p',
-            'Requested by: ' + request.requester_name);
-        addText(card, 'p',
-            'Status: ' + request.status,
-            'status ' + request.status);
-
-        if (request.status === 'pending') {
-            const actions = document.createElement('div');
-            actions.className = 'actions';
-
-            addButton(actions, 'Accept',
-                () => updateRequest(request.id, 'accepted'));
-
-            addButton(actions, 'Reject',
-                () => updateRequest(request.id, 'rejected'),
-                'danger');
-
-            card.appendChild(actions);
+            } catch (error) {
+                alert(error.message);
+            }
         }
 
-        receivedList.appendChild(card);
-    });
-}
+        document.getElementById('searchSkills')
+            .addEventListener('input', renderSkills);
 
-async function sendRequest(skill) {
-    if (!confirm('Request to learn ' + skill.title + '?')) {
-        return;
-    }
+        document.getElementById('filterCategory')
+            .addEventListener('change', renderSkills);
 
-    try {
-        const data = await api('/api/requests', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                skillId: skill.id
-            })
-        });
+        document.getElementById('sortSkills')
+            .addEventListener('change', renderSkills);
 
-        alert(data.message);
-        await loadData();
+        document.getElementById('logoutBtn')
+            .addEventListener('click', async () => {
+                try {
+                    await api('/api/auth/logout', {
+                        method: 'POST'
+                    });
 
-    } catch (error) {
-        alert(error.message);
-    }
-}
+                    window.location.replace('/login.html');
 
-async function updateRequest(id, status) {
-    if (!confirm('Are you sure you want to ' +
-                 status + ' this request?')) {
-        return;
-    }
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
 
-    try {
-        const data = await api(
-            '/api/requests/' + id + '/status',
-            {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ status })
-            }
-        );
-
-        alert(data.message);
-        await loadData();
-
-    } catch (error) {
-        alert(error.message);
-    }
-}
-
-document.getElementById('skillForm')
-.addEventListener('submit', async function(event) {
-    event.preventDefault();
-
-    const title = document.getElementById('title').value;
-    const category = document.getElementById('category').value;
-    const description =
-        document.getElementById('description').value;
-
-    const addBtn = document.getElementById('addBtn');
-    addBtn.disabled = true;
-    message.textContent = '';
-
-    try {
-        const data = await api('/api/skills', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title, category, description
-            })
-        });
-
-        message.textContent = data.message;
-        message.style.color = 'green';
-
-        document.getElementById('skillForm').reset();
-        await loadData();
-
-    } catch (error) {
-        message.textContent = error.message;
-        message.style.color = 'red';
-
-    } finally {
-        addBtn.disabled = false;
-    }
-});
-
-async function editSkill(skill) {
-    const title = prompt('Skill Title:', skill.title);
-    if (title === null) return;
-
-    const category = prompt('Category:', skill.category);
-    if (category === null) return;
-
-    const description = prompt(
-        'Description:', skill.description);
-    if (description === null) return;
-
-    try {
-        const data = await api('/api/skills/' + skill.id, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title, category, description
-            })
-        });
-
-        alert(data.message);
-        await loadData();
-
-    } catch (error) {
-        alert(error.message);
-    }
-}
-
-async function deleteSkill(skill) {
-    if (!confirm('Delete "' + skill.title +
-                 '" and its associated learning requests?')) {
-        return;
-    }
-
-    try {
-        const data = await api('/api/skills/' + skill.id, {
-            method: 'DELETE'
-        });
-
-        alert(data.message);
-        await loadData();
-
-    } catch (error) {
-        alert(error.message);
-    }
-}
-
-document.getElementById('searchSkills')
-.addEventListener('input', renderSkills);
-
-document.getElementById('filterCategory')
-.addEventListener('change', renderSkills);
-
-document.getElementById('sortSkills')
-.addEventListener('change', renderSkills);
-
-document.getElementById('logoutBtn')
-.addEventListener('click', async () => {
-    try {
-        await api('/api/auth/logout', {
-            method: 'POST'
-        });
-
-        window.location.replace('/login.html');
-
-    } catch (error) {
-        alert(error.message);
-    }
-});
-
-loadStudent();
-</script>
+        loadStudent();
+    </script>
 
 </body>
 </html>
