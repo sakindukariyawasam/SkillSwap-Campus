@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap Campus</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4faf7;
+            color: #20352d;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px #00000010;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #168457;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #34483e;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #168457;
+        }
+
+        /* Welcome section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #e0f5e9, #ffffff);
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            color: #155f42;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            color: #168457;
+            font-weight: normal;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #52665b;
+            max-width: 600px;
+            margin: 25px auto;
+            line-height: 1.7;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #168457;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #105e3d;
+        }
+
+        /* Features */
+        .features {
+            text-align: center;
+            padding: 60px 8%;
+        }
+
+        .features h2 {
+            color: #155f42;
+            margin-bottom: 35px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000010;
+            width: 240px;
+        }
+
+        .card h3 {
+            color: #168457;
+        }
+
+        .card p {
+            color: #607168;
+            line-height: 1.6;
+        }
+
+        .card .emoji {
+            font-size: 40px;
+        }
+
+        footer {
+            background: #155f42;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">SkillSwap Campus</div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Welcome to SkillSwap Campus</h1>
+        <h2>Learn Together. Grow Together.</h2>
+
+        <p>
+            A peer-to-peer learning and skill exchange
+            platform for university students.
+            Share your knowledge, discover new skills,
+            and grow with your campus community.
+        </p>
+
+        <a href="#features" class="btn">Explore SkillSwap</a>
+    </section>
+
+    <section class="features" id="features">
+        <h2>What Can You Do?</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="emoji">📚</div>
+                <h3>Learn Skills</h3>
+                <p>
+                    Discover new skills from other
+                    university students.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="emoji">💡</div>
+                <h3>Share Knowledge</h3>
+                <p>
+                    Share your talents and help
+                    other students learn.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="emoji">🤝</div>
+                <h3>Connect</h3>
+                <p>
+                    Connect with students and
+                    exchange valuable skills.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 SkillSwap Campus | EE4207 Web Application Development</p>
+    </footer>
+
+</body>
+</html>
