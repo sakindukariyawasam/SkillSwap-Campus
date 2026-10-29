@@ -90,7 +90,6 @@ Fields:
 - created_at
 
 
-### Entity Relationship Diagram
 
 ### Entity Relationship Diagram
 
