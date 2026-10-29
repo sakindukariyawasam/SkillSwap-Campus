@@ -56,6 +56,14 @@ Version Control:
 
 ## Database Design
 
+### Detailed Database Design
+
+The system uses three relational tables with primary keys,
+foreign keys, data types, constraints and indexes.
+
+For more information, see the
+[Database Design Documentation](docs/database-design.md).
+
 The application uses three main tables.
 
 ### users
