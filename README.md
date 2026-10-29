@@ -98,7 +98,7 @@ Request statuses:
 
 ### 1. Clone the repository
 
-git clone https://github.com/YOUR-USERNAME/SkillSwap-Campus.git
+git clone https://github.com/sakindukariyawasam/SkillSwap-Campus.git
 
 ### 2. Open the project folder
 
