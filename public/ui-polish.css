@@ -348,3 +348,44 @@ main section[id] {
         transition: none !important;
     }
 }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.home-link {
+    display: inline-block;
+    background: #e5f5eb;
+    color: #105b3d;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.home-link:hover {
+    background: #ccebd8;
+}
+
+.home-link:focus-visible {
+    outline: 3px solid #7bcbaa;
+    outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+    .header-actions {
+        width: 100%;
+    }
+
+    .home-link,
+    #logoutBtn {
+        text-align: center;
+    }
+}
+
