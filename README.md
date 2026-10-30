@@ -123,13 +123,30 @@ cd SkillSwap-Campus
 
 npm install
 
-### 4. Start the application
 
+### 4. Start the Application
+
+Open a terminal inside the project folder and run:
+
+```bash
 node server.js
+```
 
-### 5. Open the application
+Keep the terminal running while using the application.
+
+### 5. Open the Application
+
+After starting the server, open the following URL
+in a browser on the same computer:
 
 http://localhost:3001
+
+The SQLite database is initialized automatically
+when the application starts.
+
+Note: This is a locally hosted application.
+The server must be running to access the website.
+
 
 The SQLite database is initialized automatically when the application starts.
 
