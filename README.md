@@ -109,37 +109,39 @@ Request statuses:
 - accepted
 - rejected
 
+
 ## Project Setup
 
 ### 1. Clone the repository
 
+```bash
 git clone https://github.com/sakindukariyawasam/SkillSwap-Campus.git
+```
 
-### 2. Open the project folder
+### 2. Open the backend folder
 
-cd SkillSwap-Campus
+```bash
+cd SkillSwap-Campus/backend
+```
 
 ### 3. Install dependencies
 
-npm install
-
-
-### 4. Start the Application
-
-Open a terminal inside the project folder and run:
-
 ```bash
-node server.js
+npm install
 ```
 
-Keep the terminal running while using the application.
+### 4. Start the application
 
-### 5. Open the Application
+```bash
+npm start
+```
 
-After starting the server, open the following URL
-in a browser on the same computer:
+### 5. Open the application
 
 http://localhost:3001
+
+Keep the server running while using the application.
+The SQLite database is initialized automatically.
 
 The SQLite database is initialized automatically
 when the application starts.

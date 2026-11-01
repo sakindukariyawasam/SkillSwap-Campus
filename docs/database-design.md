@@ -149,7 +149,7 @@ changing the existing table structure.
 
 ## 8. Entity Relationship Diagram
 
-![SkillSwap Campus ER Diagram](../SkillSwap_ER_Diagram.png)
+![SkillSwap Campus ER Diagram](SkillSwap_ER_Diagram.png)
 
 ## 9. UI/UX and Responsiveness
 

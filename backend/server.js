@@ -38,7 +38,9 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, '..', 'frontend')));
+
 
 app.listen(PORT, () => {
     console.log(`SkillSwap Campus running at http://localhost:${PORT}`);
